@@ -31,7 +31,9 @@
   
   <script>
   import axios from 'axios';
-  
+
+  const apiUrl = process.env.VUE_APP_API_URL;
+
   export default {
     data() {
       return {
@@ -41,7 +43,7 @@
     methods: {
       async listarProdutos() {
         try {
-          const response = await axios.get('/produtos');
+          const response = await axios.get(`${apiUrl}/produtos`);
           this.produtos = response.data;
         } catch (error) {
           console.error('Erro ao listar produtos:', error);
@@ -49,7 +51,7 @@
       },
       async apagarProduto(id) {
         try {
-          await axios.delete(`URL_DA_API/produtos/${id}`);
+          await axios.delete(`${apiUrl}/produtos/${id}`);
           this.produtos = this.produtos.filter(produto => produto.id !== id);
           console.log('Produto apagado com sucesso');
         } catch (error) {

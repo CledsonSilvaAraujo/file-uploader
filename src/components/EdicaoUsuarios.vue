@@ -22,7 +22,10 @@
   </template>
   
   <script>
-  import axios from 'axios';
+   import axios from 'axios';
+
+   const apiUrl = process.env.VUE_APP_API_URL;
+
   
   export default {
     data() {
@@ -37,7 +40,7 @@
       async listarUsuarios() {
         try {
           // Fazer uma requisição para listar todos os usuários
-          const response = await axios.get('URL_DA_API/listar-usuarios');
+          const response = await axios.get(`${apiUrl}/listar-usuarios`);
           console.log('Todos Usuários:', response.data);
         } catch (error) {
           console.error('Erro ao listar usuários:', error);
@@ -46,7 +49,7 @@
       async listarUsuario() {
         try {
           // Fazer uma requisição para listar um usuário por email
-          const response = await axios.get(`URL_DA_API/listar-usuario/${this.emailListar}`);
+          const response = await axios.get(`${apiUrl}/listar-usuario/${this.emailListar}`);
           console.log('Usuário por Email:', response.data);
           this.usuario = response.data;
         } catch (error) {
@@ -56,7 +59,7 @@
       async apagarUsuario() {
         try {
           // Fazer uma requisição para apagar um usuário por email
-          await axios.delete(`URL_DA_API/apagar-usuario/${this.emailApagar}`);
+          await axios.delete(`${apiUrl}/apagar-usuario/${this.emailApagar}`);
           console.log('Usuário apagado com sucesso');
         } catch (error) {
           console.error('Erro ao apagar usuário por email:', error);

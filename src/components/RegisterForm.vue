@@ -20,8 +20,11 @@
   </template>
   
   <script>
-  import axios from 'axios';
-  
+   import axios from 'axios';
+
+    const apiUrl = process.env.VUE_APP_API_URL;
+
+
   export default {
     data() {
       return {
@@ -33,7 +36,7 @@
     methods: {
       async submitForm() {
         try {
-          const response = await axios.post('/register', {
+          const response = await axios.post(`${apiUrl}/register`, {
             name: this.name,
             email: this.email,
             password: this.password
